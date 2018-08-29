@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-import { slugify } from '../util/url'
+import { slugify } from '../../util/url'
 import './PostCategoriesNav.css'
 
 const PostCategoriesNav = ({ categories }) => (

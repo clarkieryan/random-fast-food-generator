@@ -1,7 +1,7 @@
 import React from 'react'
 
-import Content from '../components/Content'
-import PageHeader from '../components/PageHeader'
+import Content from '../components/global/Content'
+import PageHeader from '../components/global/PageHeader'
 import './Home.css'
 
 export default ({ fields }) => {

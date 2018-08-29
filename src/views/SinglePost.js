@@ -2,8 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { ChevronLeft } from 'react-feather'
 
-import Content from '../components/Content'
-import BackgroundImage from '../components/BackgroundImage'
+import Content from '../components/global/Content'
+import BackgroundImage from '../components/global/BackgroundImage'
 import { dateFormatted } from '../util/date'
 import './SinglePost.css'
 

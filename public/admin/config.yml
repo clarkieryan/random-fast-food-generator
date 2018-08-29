@@ -8,88 +8,6 @@ media_folder: "public/images/uploads" # Media files will be stored in the repo u
 public_folder: "/images/uploads" # The src attribute for uploaded media will begin with /images/uploads
 
 collections: # A list of collections the CMS should be able to edit
-  - name: "pages"
-    label: "Page"
-    delete: false # Prevent users from deleting documents in this collection
-    editor:
-      preview: true
-    files:
-      - file: "content/pages/contact.md"
-        label: "Contact Page"
-        name: "contact-page"
-        fields:
-          - {label: Title, name: title, widget: string}
-          - {label: Featured Image, name: featuredImage, widget: image}
-          - {label: Subtitle, name: subtitle, widget: markdown}
-          - {label: Body, name: body, widget: markdown}
-          - {label: Address, name: address, widget: text}
-          - {label: Phone, name: phone, widget: string}
-          - {label: Email Address, name: email, widget: string}
-          - label: "Meta"
-            required: false
-            name: "meta"
-            widget: "object"
-            fields:
-              - {label: Title, name: title, widget: string, required: false}
-              - {label: Description, name: description, widget: text, required: false, pattern: [".{,300}", "Must not exceed 300 characters"]}
-              - {label: Canonical Link, name: canonicalLink, widget: string, required: false}
-              - {label: Noindex, name: noindex, widget: boolean, required: false}
-
-      - file: "content/pages/blog.md"
-        label: "Blog Page"
-        name: "blog-page"
-        fields:
-          - {label: Title, name: title, widget: string}
-          - {label: Featured Image, name: featuredImage, widget: image}
-          - {label: Subtitle, name: subtitle, widget: markdown}
-          - label: "Meta"
-            required: false
-            name: "meta"
-            widget: "object"
-            fields:
-              - {label: Title, name: title, widget: string, required: false}
-              - {label: Description, name: description, widget: text, required: false, pattern: [".{,300}", "Must not exceed 300 characters"]}
-              - {label: Canonical Link, name: canonicalLink, widget: string, required: false}
-              - {label: Noindex, name: noindex, widget: boolean, required: false}
-
-      - file: "content/pages/about.md"
-        label: "About Page"
-        name: "about-page"
-        fields:
-          - {label: Title, name: title, widget: string}
-          - {label: Featured Image, name: featuredImage, widget: image}
-          - {label: Subtitle, name: subtitle, widget: markdown}
-          - {label: Section 1, name: section1, widget: markdown}
-          - {label: Section 2, name: section2, widget: markdown}
-          - label: "Meta"
-            required: false
-            name: "meta"
-            widget: "object"
-            fields:
-              - {label: Title, name: title, widget: string, required: false}
-              - {label: Description, name: description, widget: text, required: false, pattern: [".{,300}", "Must not exceed 300 characters"]}
-              - {label: Canonical Link, name: canonicalLink, widget: string, required: false}
-              - {label: Noindex, name: noindex, widget: boolean, required: false}
-
-      - file: "content/pages/home.md"
-        label: "Home Page"
-        name: "home-page"
-        fields:
-          - {label: Title, name: title, widget: string}
-          - {label: Featured Image, name: featuredImage, widget: image}
-          - {label: Subtitle, name: subtitle, widget: markdown}
-          - {label: Body, name: body, widget: markdown}
-          - label: "Meta"
-            required: false
-            name: "meta"
-            widget: "object"
-            fields:
-              - {label: Title, name: title, widget: string, required: false}
-              - {label: Description, name: description, widget: text, required: false, pattern: [".{,300}", "Must not exceed 300 characters"]}
-              - {label: Canonical Link, name: canonicalLink, widget: string, required: false}
-              - {label: Noindex, name: noindex, widget: boolean, required: false}
-
-
   - name: posts
     label: Post
     editor:
@@ -113,12 +31,12 @@ collections: # A list of collections the CMS should be able to edit
         widget: "list"
         required: false
         fields:
-          - label: "Category"
-            name: "category"
+          - label: "Food Category"
+            name: "foodCategory"
             widget: "relation"
-            collection: "postCategories"
-            searchFields: ["title"]
-            valueField: "title"
+            collection: "foodCategories"
+            searchFields: ["name"]
+            valueField: "name"
       - label: "Meta"
         required: false
         name: "meta"
@@ -129,27 +47,17 @@ collections: # A list of collections the CMS should be able to edit
           - {label: Canonical Link, name: canonicalLink, widget: string, required: false}
           - {label: Noindex, name: noindex, widget: boolean, required: false}
 
-
-  - name: postCategories
-    label: Post Category
-    editor:
+  - name: foodCategories
+    label: Food Categories
+    editor: 
       preview: false
-    folder: content/postCategories
-    slug: "{{slug}}"
-    create: true # Allow users to create new documents in this collection
-    fields: # The fields each document in this collection have
-      - {label: Title, name: title, widget: string}
-      - label: "Meta"
-        required: false
-        name: "meta"
-        widget: "object"
-        fields:
-          - {label: Title, name: title, widget: string, required: false}
-          - {label: Description, name: description, widget: text, required: false, pattern: [".{,300}", "Must not exceed 300 characters"]}
-          - {label: Canonical Link, name: canonicalLink, widget: string, required: false}
-          - {label: Noindex, name: noindex, widget: boolean, required: false}
-
-
+    folder: content/foods
+    slug: {{slug}}
+    create: true
+    fields:
+      - {label: Category Name , name: name, widget: string }
+      - {label: Image, name: image, widget: image, required: false}
+    
   - name: "settings"
     label: "Settings"
     delete: false # Prevent users from deleting documents in this collection

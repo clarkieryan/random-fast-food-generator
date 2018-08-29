@@ -1,34 +1,16 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import Helmet from 'react-helmet'
 
-import ScrollToTop from './components/ScrollToTop'
-import Meta from './components/Meta'
+import Meta from './components/global/Meta'
 import Home from './views/Home'
-import About from './views/About'
-import Blog from './views/Blog'
 import SinglePost from './views/SinglePost'
-import Contact from './views/Contact'
 import NoMatch from './views/NoMatch'
-import Nav from './components/Nav'
-import Footer from './components/Footer'
-import GithubCorner from './components/GithubCorner'
-import ServiceWorkerNotifications from './components/ServiceWorkerNotifications'
+import Nav from './components/global/Nav'
+import Footer from './components/global/Footer'
+import ServiceWorkerNotifications from './components/global/ServiceWorkerNotifications'
 import data from './data.json'
 import { slugify } from './util/url'
-import { documentHasTerm, getCollectionTerms } from './util/collection'
-
-const RouteWithMeta = ({ component: Component, ...props }) => (
-  <Route
-    {...props}
-    render={routeProps => (
-      <Fragment>
-        <Meta {...props} />
-        <Component {...routeProps} {...props} />
-      </Fragment>
-    )}
-  />
-)
+import { getCollectionTerms } from './util/collection'
 
 class App extends Component {
   state = {
@@ -62,14 +44,10 @@ class App extends Component {
     return (
       <Router>
         <div className='React-Wrap'>
-          <ScrollToTop />
           <ServiceWorkerNotifications reloadOnUpdate />
-          <GithubCorner url='https://github.com/Jinksi/netlify-cms-react-starter' />
-          <Helmet
+          <Meta
             defaultTitle={siteTitle}
             titleTemplate={`${siteTitle} | %s`}
-          />
-          <Meta
             headerScripts={headerScripts}
             absoluteImageUrl={
               socialMediaCard &&
@@ -84,44 +62,19 @@ class App extends Component {
             }
           />
 
-          <Nav />
-
           <Switch>
-            <RouteWithMeta
+            <Route
               path='/'
               exact
-              component={Home}
-              description={siteDescription}
-              fields={this.getDocument('pages', 'home')}
+              render={() => <Home description={siteDescription} fields={this.getDocument('pages', 'home')} />}
             />
-            <RouteWithMeta
-              path='/about/'
-              exact
-              component={About}
-              fields={this.getDocument('pages', 'about')}
-            />
-            <RouteWithMeta
-              path='/contact/'
-              exact
-              component={Contact}
-              fields={this.getDocument('pages', 'contact')}
-              siteTitle={siteTitle}
-            />
-            <RouteWithMeta
-              path='/blog/'
-              exact
-              component={Blog}
-              fields={this.getDocument('pages', 'blog')}
-              posts={posts}
-              postCategories={postCategories}
-            />
-
+          
             {posts.map((post, index) => {
               const path = slugify(`/blog/${post.title}`)
               const nextPost = posts[index - 1]
               const prevPost = posts[index + 1]
               return (
-                <RouteWithMeta
+                <Route
                   key={path}
                   path={path}
                   exact
@@ -129,25 +82,6 @@ class App extends Component {
                   fields={post}
                   nextPostURL={nextPost && slugify(`/blog/${nextPost.title}/`)}
                   prevPostURL={prevPost && slugify(`/blog/${prevPost.title}/`)}
-                />
-              )
-            })}
-
-            {postCategories.map(postCategory => {
-              const slug = slugify(postCategory.title)
-              const path = slugify(`/blog/category/${slug}`)
-              const categoryPosts = posts.filter(post =>
-                documentHasTerm(post, 'categories', slug)
-              )
-              return (
-                <RouteWithMeta
-                  key={path}
-                  path={path}
-                  exact
-                  component={Blog}
-                  fields={this.getDocument('pages', 'blog')}
-                  posts={categoryPosts}
-                  postCategories={postCategories}
                 />
               )
             })}

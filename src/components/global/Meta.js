@@ -15,8 +15,9 @@ const Meta = props => {
     twitterCreatorAccount,
     headerScripts,
     noindex,
-    canonicalLink
-    // overwrite { title, description } if in fields or fields.meta
+    canonicalLink,
+    defaultTitle,
+    titleTemplate
   } = {
     ...props,
     ...onlyTruthyValues(_get(props, 'fields')),
@@ -30,7 +31,7 @@ const Meta = props => {
   }
 
   return (
-    <Helmet>
+    <Helmet defaultTitle={defaultTitle} titleTemplate={titleTemplate}>
       {title && <title>{title}</title>}
       {title && <meta property='og:title' content={title} />}
       {description && <meta name='description' content={description} />}

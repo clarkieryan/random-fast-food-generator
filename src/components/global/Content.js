@@ -2,7 +2,7 @@ import React from 'react'
 import Marked from 'react-markdown'
 import PropTypes from 'prop-types'
 
-import { getImageSrc, getImageSrcset } from '../util/getImageUrl'
+import { getImageSrc, getImageSrcset } from '../../util/getImageUrl'
 import './Content.css'
 
 const encodeMarkdownURIs = (source = '') => {
