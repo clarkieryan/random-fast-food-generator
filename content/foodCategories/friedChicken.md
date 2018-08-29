@@ -1,4 +1,4 @@
 ---
-name: Fried Chicken
+title: Fried Chicken
 ---
 

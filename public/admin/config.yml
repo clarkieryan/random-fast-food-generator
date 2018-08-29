@@ -52,10 +52,10 @@ collections: # A list of collections the CMS should be able to edit
     editor: 
       preview: false
     folder: content/foodCategories
-    slug: {{slug}}
+    slug: "{{slug}}"
     create: true
     fields:
-      - {label: Category Name , name: name, widget: string }
+      - {label: Category Name , name: title, widget: string }
       - {label: Image, name: image, widget: image, required: false}
     
   - name: "settings"
