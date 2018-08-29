@@ -1,4 +1,4 @@
 ---
-name: Fried Chicken Kent
+name: Fried Chicken
 ---
 
